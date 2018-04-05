@@ -1,0 +1,51 @@
+Exploratory Data Analysis means analyzing the datasets to summarize their main characteristics, often visually.
+This is the first step of any data analysis.
+Objectives:
+
+    Know the data types of the dataset – whether continuous/discreet/categorical
+    Understand how the data is distributed
+    Extract important input variables for the analysis
+    Identify outliers
+    To identity patterns, if exists
+
+Exploratory Analysis Techniques:
+
+    Box-Plot
+    Histogram
+    Trend analysis
+    Scatter Plots
+
+
+
+Steps to summarize sample data for EDA: 
+i)Identify Business Problem:
+ 				“Define Problem statement”
+This is the first step of analysis. Business identifies a problem and a problem statement with desired outcome is defined. 
+In this stage, a Data Scientist should understand the problem statement, the domain knowledge of the problem. After thorough 
+understanding of the problem statement, a Hypothesis will be proposed.
+
+ii)Data Acquisition:
+				“Identify data sources”
+As a second step, all the data sources related to the problem statement will be identified and pulled into a central repository. 
+The data sources can vary from SQL databases to text files to csv files to online data. If the data size is large we may use 
+Hadoop to pull, store & pre-process the data.
+
+iii)Process/Clean Data:
+ 				“The accuracy of the results of analysis depends on the quality of data” 
+Data Clean step is considered to be one of the very important phases in Data analysis. The accuracy of the analysis depends 
+on the quality of data.
+Few approaches:
+
+    Formatting the data as per the data analytical tools we use.
+    Missing data handling
+    Data Transformations like normalizing the data Identifying outliers & handling etc.
+
+iv)Exploratory Analysis:
+ 				“Embrace the data visually before diving further”
+The objective of this step is to understand the main characteristics of the data. This analysis is generally done using visualizing 
+tools. Performing an Exploratory analysis helps us:
+
+    to understand causes of an observed event
+    to understand the nature of the data we are dealing with
+    assess assumptions on which our analysis will be based
+    to identify the key features in the data needed for the analysis

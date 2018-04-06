@@ -1,0 +1,241 @@
+
+Question 5 
+
+
+from collections import Counter
+import numpy as np
+import statistics as sc
+import scipy as sp
+x = [11.95,11.91,11.94,12.00,11.93,12.0,11.94,12.10,11.95,11.99,11.94,11.89,12.01,11.99,11.94]
+
+print("frequency Distribution : ",Counter(x).most_common() )
+
+print("Mean : ",np.mean(x))
+print("Median : ",np.median(x))
+print("Mode : " ,Counter(x).most_common()[0])
+
+Output
+
+frequency Distribution :  [(11.94, 4), (11.95, 2), (12.0, 2), (11.99, 2), (11.91, 1), (11.93, 1), (12.1, 1), (11.89, 1), (12.01, 1)]
+Mean :  11.965333333333335
+Median :  11.95
+Mode :  (11.94, 4)
+
+
+Question 4
+
+t = ()
+l = []
+for i in range(0,3):
+    name = input("Name ")
+    age = int(input("age "))
+    
+    t=(name,age)
+    l.append(t)
+
+print("Kids( 0 - 18 ) : ")
+for i in range(0,3):
+    if(l[i][1]<18):
+        print(l[i][0])
+
+print("Youth( 18 - 30 ) : ")
+for i in range(0,3):
+    if(l[i][1]>18 and l[i][1]<30):
+        print(l[i][0])
+
+
+print("Middle Aged( 30 - 60 ) : ")
+
+for i in range(0,3):
+    if(l[i][1]>30 and l[i][1]<60 ):
+        print(l[i][0])
+print("Seniors( 60+ ) : ")
+for i in range(0,3):
+    if(l[i][1]>60):
+        print(l[i][0])
+        
+
+OUTPUT
+
+Name Akash
+
+age 22
+
+Name Rahul
+
+age 33
+
+Name Karthik
+
+age 77
+Kids( 0 - 18 ) : 
+Youth( 18 - 30 ) : 
+Akash
+Middle Aged( 30 - 60 ) : 
+Rahul
+Seniors( 60+ ) : 
+Karthik
+
+
+
+
+
+
+Question 2 
+
+import numpy as np
+
+t= ()
+list = []
+
+for i in range(0,2):
+    name = input("Name : ")
+    sub1 = int(input("Sub 1 marks : "))
+    sub2 = int(input("Sub 2 marks : "))
+    sub3 = int(input("Sub 3 marks : "))
+    total = sub1+sub2+sub3
+    if total>90:
+        grade = 'A+'
+    elif total>80 and total<90:
+        grade='A'
+    elif total>70 and total<80:
+        grade='B+'
+    elif total>60 and total<70:
+        grade='B'
+    elif total>50 and total<60:
+        grade='C'
+    else:
+        grade='D'
+    
+    
+    t = (name,sub1,sub2,sub3,total,grade)
+    list.append(t)
+
+print("Name \t Sub1 \t Sub2 \t Sub3 ")
+
+for i in range(len(list)):
+    print(list[i][0],"\t",list[i][1],"\t",list[i][2],"\t",list[i][3])
+
+
+#print(list)
+
+sub1_array = []
+sub2_array = []
+sub3_array = []
+
+for i in range(0,2):
+    obj = list[i]
+    sub1_array.append(obj[1])
+    sub2_array.append(obj[2])
+    sub3_array.append(obj[3])
+
+print("Mean subject 1 : ",np.mean(sub1_array))
+print("Median subject 1 : ",np.median(sub1_array))
+print("Mean subject 2 : ",np.mean(sub2_array))
+print("Median subject 2 : ",np.median(sub2_array))
+print("Mean subject 3 : ",np.mean(sub3_array))
+print("Median subject 3 : ",np.median(sub2_array))
+
+for i in range(len(list)):
+    print(list[i][0]," : " ,list[i][5])
+
+
+Input
+Name : Akash
+
+Sub 1 marks : 10
+
+Sub 2 marks : 20
+
+Sub 3 marks : 30
+
+Name : Rahul
+
+Sub 1 marks : 20
+
+Sub 2 marks : 40
+
+Sub 3 marks : 60
+
+Output
+Name     Sub1    Sub2    Sub3 
+Akash    10      20      30
+Rahul    20      40      60
+
+Mean subject 1 :  15.0
+Median subject 1 :  15.0
+Mean subject 2 :  30.0
+Median subject 2 :  30.0
+Mean subject 3 :  45.0
+Median subject 3 :  30.0
+
+Akash  :  D
+Rahul  :  A+
+
+
+Question 1
+
+import re 
+
+#Getting input from user
+s = str(input('Enter Paragraph'))
+print(s)
+
+a = s.split('.')
+
+no_of_sentences = int(len(a))
+
+#Inserting the sentence in between
+a.insert(int(no_of_sentences/2),"UST Global specializes in Healthcare ,Retail & Consumer Goods,Banking,Financial Services,telecom,Media & technology, Insurance,Transportation & Logistocs and Manufacturing & Utilities")
+
+print(a)
+
+no_of_sentences = int(len(a))
+#Swapping first and last sentences
+
+first = a[0]
+a[0] = a[-1]
+a[-1] = first
+
+print(a)
+
+#Removing special characters from the sentence.
+s = re.sub('[^A-Za-z0-9]+', ' ', s)
+
+print("After removing special characters")
+print (s)
+
+
+#Counting vowels ,uppercases,lowercases,special . . 
+
+count_vowel = 0
+count_upper = 0
+count_lower = 0
+count_special = 0
+
+for i in str(s):
+    if(re.match('^aeiouAEIOU',i)):
+        count_vowel = count_vowel+1
+    if(i.isupper()):
+        count_upper = count_upper+1
+    if(i.islower()):
+        count_lower = count_lower+1
+    
+print("Vowels : ",count_vowel)
+print("Upper Case : ",count_upper)
+print("Lower Case : ",count_lower)
+
+
+    
+        
+
+OUTPUT
+
+Hello.I am Akash . I am Engineering Graduate
+[' Hello', 'UST Global specializes in Healthcare ,Retail & Consumer Goods,Banking,Financial Services,telecom,Media & technology, Insurance,Transportation & Logistocs and Manufacturing & Utilities', 'I am Akash ', ' I am Engineering Graduate']
+[' I am Engineering Graduate', 'UST Global specializes in Healthcare ,Retail & Consumer Goods,Banking,Financial Services,telecom,Media & technology, Insurance,Transportation & Logistocs and Manufacturing & Utilities', 'I am Akash ', ' Hello']
+After removing special characters
+ Hello I am Akash I am Engineering Graduate
+Vowels :  0
+Upper Case :  6
+Lower Case :  29

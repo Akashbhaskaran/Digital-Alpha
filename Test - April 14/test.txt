@@ -1,0 +1,248 @@
+Question 2 
+
+import pandas as pd
+from pandas import ExcelWriter
+from pandas import ExcelFile
+d = {}
+l=[]
+#input data
+for i in range(0,2):
+    name = input("Name")
+    age = int(input("age : "))
+    weight = int(input("Weight : "))
+    height = int(input("Height : "))
+    gender = input("Gender : ")
+    
+    d = {'name':name,'age':age,'height':height,'weight':weight,'gender':gender}
+    l.append(d)
+
+df = pd.DataFrame(l)
+
+#Save data to file
+writer = ExcelWriter('Student-data.xlsx')
+df.to_excel(writer,'Sheet1',index=False)
+writer.save()
+
+#Retrieve data
+df = pd.read_excel("Student-data.xlsx")
+
+#Sort based on height
+
+print(df.sort_values(['height']))
+
+#Caluclate BMI
+df['bmi'] = df['weight']/df['height']**2
+print(df)
+
+#grouping bmi
+df_group = df.groupby(['bmi']).mean()
+print(df_group)
+
+
+#grouping weights
+df.ix[(df.weight >= 80) & (df.weight < 100) , 'weightGrp'] = 'OverWeight'
+df.ix[(df.weight >= 100) , 'weightGrp'] = 'Obese'
+df.ix[(df.weight >= 50) & (df.weight < 80) , 'weightGrp'] = 'Healthy'
+df.ix[(df.weight < 50) , 'weightGrp'] = 'Under Weight'
+
+print(df)
+
+
+Output
+
+
+NameAkash
+
+age : 22
+
+Weight : 55
+
+Height : 170
+
+Gender : Male
+
+NameGautham
+
+age : 22
+
+Weight : 90
+
+Height : 180
+
+Gender : Male
+
+   age gender  height     name  weight
+0   22   Male     170    Akash      55
+1   22   Male     180  Gautham      90
+
+
+   age gender  height     name  weight       bmi
+0   22   Male     170    Akash      55  0.001903
+1   22   Male     180  Gautham      90  0.002778
+
+
+          age  height  weight
+bmi                          
+0.001903   22     170      55
+0.002778   22     180      90
+
+
+   age gender  height     name  weight       bmi   weightGrp
+0   22   Male     170    Akash      55  0.001903     Healthy
+1   22   Male     180  Gautham      90  0.002778  OverWeight
+
+
+Question 2
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as pyplot
+import seaborn as sns
+
+
+#Read file
+data = pd.read_csv('Camera1.csv', sep=';')
+data = data.iloc[1:,:] 
+
+#Print column names
+print(data.columns.values)
+#Printe column with datatypes
+print(data.dtypes)
+
+#Print first 25 rows
+print(data.iloc[0:25,[0,1,-1]])
+
+#Summarising the data set
+
+print(data.describe())
+
+
+print(data['Storage included'].unique())
+
+print(data['Storage included'].value_counts())
+
+#Converting price to float
+data['Price'] = data['Price'].apply(float)
+
+#Summary of price
+print(data.describe())
+
+#Eliminating price less than 1000
+df = data[data['Price']>1000]
+
+
+pyplot.plot(df['Release date'],df['Price'])
+pyplot.xlabel('Relase Date')
+pyplot.ylabel('Price ')
+
+pyplot.show
+
+#Release date vs count
+sns.countplot(x = data['Release date'], data = data)
+
+#Storage vs Count
+sns.countplot(x = data['Storage included'], data = data)
+
+
+OUTPUT
+
+['Model' 'Release date' 'Max resolution' 'Low resolution'
+ 'Effective pixels' 'Zoom wide (W)' 'Zoom tele (T)' 'Normal focus range'
+ 'Macro focus range' 'Storage included' 'Weight (inc. batteries)'
+ 'Dimensions' 'Price']
+
+Model                      object
+Release date               object
+Max resolution             object
+Low resolution             object
+Effective pixels           object
+Zoom wide (W)              object
+Zoom tele (T)              object
+Normal focus range         object
+Macro focus range          object
+Storage included           object
+Weight (inc. batteries)    object
+Dimensions                 object
+Price                      object
+
+
+                 Model Release date   Price
+1         Agfa ePhoto 1280         1997   179.0
+2         Agfa ePhoto 1680         1998   179.0
+3         Agfa ePhoto CL18         2000   179.0
+4         Agfa ePhoto CL30         1999   269.0
+5   Agfa ePhoto CL30 Clik!         1999  1299.0
+6         Agfa ePhoto CL45         2001   179.0
+7         Agfa ePhoto CL50         1999   179.0
+8      Canon PowerShot 350         1997   149.0
+9      Canon PowerShot 600         1996   139.0
+10     Canon PowerShot A10         2001   139.0
+11    Canon PowerShot A100         2002   139.0
+12     Canon PowerShot A20         2001   139.0
+13    Canon PowerShot A200         2002   139.0
+14     Canon PowerShot A30         2002   139.0
+15    Canon PowerShot A300         2003   139.0
+16    Canon PowerShot A310         2004   139.0
+17     Canon PowerShot A40         2002   139.0
+18    Canon PowerShot A400         2004   139.0
+19    Canon PowerShot A410         2005   139.0
+20    Canon PowerShot A420         2006   139.0
+21    Canon PowerShot A430         2006   139.0
+22    Canon PowerShot A450         2007   139.0
+23    Canon PowerShot A460         2007   139.0
+24      Canon PowerShot A5         1998   149.0
+25     Canon PowerShot A50         1999   149.0
+
+
+
+                      Model Release date Max resolution Low resolution  \
+count                  1038         1038           1038           1038   
+unique                 1038           14             99             70   
+top     Olympus C-4040 Zoom         2007         3072.0         2048.0   
+freq                      1          163            108            187   
+
+       Effective pixels Zoom wide (W) Zoom tele (T) Normal focus range  \
+count              1038          1038          1038               1038   
+unique               16            25           100                 32   
+top                 3.0          38.0         114.0               50.0   
+freq                197           259           163                286   
+
+       Macro focus range Storage included Weight (inc. batteries) Dimensions  \
+count               1037             1036                    1036       1036   
+unique                29               44                     237        101   
+top                 10.0             16.0                   320.0       90.0   
+freq                 200              279                      34         48   
+
+        Price  
+count    1038  
+unique     43  
+top     149.0  
+freq      112  
+
+
+
+
+
+
+             Price
+count  1038.000000
+mean    457.384393
+std     760.452918
+min      14.000000
+25%     149.000000
+50%     199.000000
+75%     399.000000
+max    7999.000000
+
+
+
+
+
+
+
+
+
+
+
+

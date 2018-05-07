@@ -1,0 +1,20 @@
+class Principal(object):
+    __SchoolIncome =0
+    def __init__(self):
+        self._studentlist = ['A','B','C']
+        self.__SchoolIncome = 1000
+
+
+class Teacher(Principal):
+    def __init__(self):
+        Principal.__init__(self)
+    def print_studentlist(self):
+        print (self._studentlist)
+
+    def print_schoolincome(self):
+        print(self.__SchoolIncome)
+
+
+c = Teacher()
+c.print_studentlist()
+c.print_schoolincome() # Teacher cannot access
